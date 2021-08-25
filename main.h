@@ -236,4 +236,3 @@ char *check_path(char *str);
 char *search_path(char *command);
 /* ******** ---------------- ******** */
 #endif
-
