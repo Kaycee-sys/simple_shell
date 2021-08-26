@@ -80,7 +80,9 @@ char is_alias_assignment(char *str, char **name_out, char **value_out)
 	char is_assignment = FALSE;
 
 	for (; (str != NULL) && (*(str + i) != '='); i++)
+	{
 		name_len++;
+	}
 	is_assignment = ((str != NULL) && (*(str + i) == '=')) ? TRUE : FALSE;
 	i++;
 	for (; (str != NULL) && (*(str + i) != '\0'); i++)
