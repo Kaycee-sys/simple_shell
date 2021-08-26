@@ -73,4 +73,3 @@ char is_variable_expandible(char *str, int pos, char quote, char quote_o)
 	}
 	return (FALSE);
 }
-
