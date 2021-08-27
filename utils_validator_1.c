@@ -61,6 +61,7 @@ char is_built_in_cmd(cmd_t *node)
 /**
  * is_binary_file - checks if a file is a binary file
  * @fn: file file name
+ *
  * Return: True or False
  */
 char is_binary_file(char *fn)
@@ -71,12 +72,10 @@ char is_binary_file(char *fn)
 
 	if (fd == -1)
 	{
-		perror("couldn't open the file in is_binary_file\n");
 		return (-1);
 	}
 	if (read(fd, buf, n) == -1)
 	{
-		perror("couldn't read the file in is_binary_file\n");
 		close(fd);
 		return (-1);
 	}
@@ -119,18 +118,14 @@ char is_variable(char *str)
 }
 
 /**
- * is_exec_file - Checks if a file is a binary file
- * @fn: The name of the file
+ * is_exec_file - Checks if a file is executable
+ * @fp: file path
  *
  * Return: True or False
  */
-char is_exec_file(char *fn)
+char is_exec_file(char *fp)
 {
-	struct stat sb;
-
-	if (stat(fn, &sb) == 0 && sb.st_mode & S_IXUSR)
-	{
+	if (access(fp, F_OK | R_OK | X_OK) == 0)
 		return (TRUE);
-	}
 	return (FALSE);
 }

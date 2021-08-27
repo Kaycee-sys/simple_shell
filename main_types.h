@@ -230,4 +230,3 @@ typedef struct built_in_cmd built_in_cmd_t;
 typedef struct alias alias_t;
 typedef struct processing_table proc_tbl_t;
 #endif
-
