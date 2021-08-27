@@ -21,12 +21,11 @@ int sc_exit(int ac, char *av[])
 		else
 		{
 			buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-			buf1 = long_to_str(get_line_num());
+			buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 			write(STDERR_FILENO, buf0, str_len(buf0));
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, buf1, str_len(buf1));
-			write(STDERR_FILENO, ": exit: ", 8);
-			write(STDERR_FILENO, "Illegal number: ", 16);
+			write(STDERR_FILENO, ": exit: Illegal number: ", 24);
 			write(STDERR_FILENO, av[0], str_len(av[0]));
 			write(STDERR_FILENO, "\n", 1);
 			if (buf1 != NULL)

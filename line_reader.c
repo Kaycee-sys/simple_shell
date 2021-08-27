@@ -48,7 +48,7 @@ char *get_cmd_line(void)
 			for (k = 0; (Buf[i] != '\n') && (k < j) && (i < MAX_BUF_SIZE); k++)
 			{
 				check_chars(&quote, &quote_o, Buf[i]);
-				*(line + len) = Buf[i], len++, i++;
+				*(line + len) = Buf[i], len += sig(1), i++;
 			}
 			stop = (Buf[i] == '\n' ? TRUE : stop);
 			i = (i >= MAX_BUF_SIZE ? 0 : i);
@@ -113,7 +113,7 @@ void set_error(char *error, char quote_o, int n, char *str, int pos)
 		|| ((quote_o == TRUE) || ops_at_end))
 	{
 		buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-		buf1 = long_to_str(get_line_num());
+		buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 
 		write(STDERR_FILENO, buf0, str_len(buf0));
 		write(STDERR_FILENO, ": ", 2);

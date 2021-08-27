@@ -53,17 +53,18 @@ int sc_setenv(int ac, char *av[])
 	{
 		if (is_variable(av[0]))
 		{
-			add_env_var(av[0], ac > 1 ? av[1] : "");
+			if (ac > 1)
+				add_env_var(av[0], av[1]);
 			return (EC_SUCCESS);
 		}
 		else
 		{
 			buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-			buf1 = long_to_str(get_line_num());
+			buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 			write(STDERR_FILENO, buf0, str_len(buf0));
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, buf1, str_len(buf1));
-			write(STDERR_FILENO, "setenv: ", 8);
+			write(STDERR_FILENO, ": setenv: ", 10);
 			write(STDERR_FILENO, av[0], str_len(av[0]));
 			write(STDERR_FILENO, ": not a variable\n", 17);
 			if (buf1 != NULL)
@@ -74,7 +75,7 @@ int sc_setenv(int ac, char *av[])
 	else
 	{
 		buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-		buf1 = long_to_str(get_line_num());
+		buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 		write(STDERR_FILENO, buf0, str_len(buf0));
 		write(STDERR_FILENO, ": ", 2);
 		write(STDERR_FILENO, buf1, str_len(buf1));
@@ -106,7 +107,7 @@ int sc_unsetenv(int ac, char *av[])
 		else
 		{
 			buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-			buf1 = long_to_str(get_line_num());
+			buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 			write(STDERR_FILENO, buf0, str_len(buf0));
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, buf1, str_len(buf1));
@@ -121,7 +122,7 @@ int sc_unsetenv(int ac, char *av[])
 	else
 	{
 		buf0 = *((char **)get_shell_prop(EXEC_NAME_ID));
-		buf1 = long_to_str(get_line_num());
+		buf1 = long_to_str(*((int *)get_shell_prop(LINE_NUMBER_ID)));
 		write(STDERR_FILENO, buf0, str_len(buf0));
 		write(STDERR_FILENO, ": ", 2);
 		write(STDERR_FILENO, buf1, str_len(buf1));
